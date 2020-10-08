@@ -55,7 +55,7 @@ namespace VendingMachine.Tests
             string actual = vendingMachine.ExitMachine(testCoins);
 
             //Assert
-            Assert.Equal(expected, actual);
+            Assert.NotEqual(expected, actual);
 
         }
 

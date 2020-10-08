@@ -57,6 +57,7 @@ namespace VendingMachine
             string newString = "";
             for (var i = 0; i < acceptedCoin.Length; i++)
             {
+                if (coinsBack[i] > 0)
                 newString += (acceptedCoin[i] + " x " + coinsBack[i] + ", ");
             }
 

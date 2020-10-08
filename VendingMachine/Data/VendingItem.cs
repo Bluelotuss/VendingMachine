@@ -21,7 +21,7 @@ namespace VendingMachine
             this.itemID = itemID;
         }
 
-        public int Purchase(int moneyPool)
+        public int Purchase(int moneyPool)  // Hur fattar den att den ska uppdatera moneyPool i VM?
         {
             if (moneyPool >= ItemPrice)
             {
