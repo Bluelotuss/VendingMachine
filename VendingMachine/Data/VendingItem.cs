@@ -21,11 +21,12 @@ namespace VendingMachine
             this.itemID = itemID;
         }
 
-        public void Purchase(int[] moneyPool)
+        public int Purchase(int moneyPool)
         {
-            if (moneyPool[0] >= ItemPrice)
+            if (moneyPool >= ItemPrice)
             {
-                moneyPool[0] -= ItemPrice;
+                moneyPool -= ItemPrice;
+                return moneyPool;
             }
             else
             {

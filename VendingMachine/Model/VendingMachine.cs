@@ -2,77 +2,65 @@
 namespace VendingMachine
 {
     public class VendingMachine
-    { 
-        private static VendingItem[] item = new VendingItem[3];
+    {
+        private static VendingItem[] item = new VendingItem[0];
 
-        public VendingMachine()
+        readonly static int[] acceptedCoin = new int[8] { 1000, 500, 100, 50, 20, 10, 5, 1 };
+        public int[] AcceptedCoin { get { return acceptedCoin; } }
+
+
+        int moneyPool = 0;
+        public int MoneyPool { get { return moneyPool; } }
+
+
+        public void AddToMoneyPool(int coin)
         {
-            item[0] = new Drink("CocaCola", 10, "Drink the CocaCola", 1);
-            item[1] = new Food("Pizza", 20, "Eat the pizza", 2);
-            item[2] = new Toy("Teddybear", 50, "Play with teddy", 3);
+            moneyPool += coin;
         }
 
-        readonly static int[] acceptedCoin = new int[8] { 1, 5, 10, 20, 50, 100, 500, 1000 };
 
 
-        private int[] moneyPool = new int[0];
-        private int MoneyPool(int coin)
+        /* private void PurchaseItem(int enteredItemID)
+         {
+             for(var i = 0; i < item.Length; i++)
+             {
+                 if(item[i].ItemID == enteredItemID)
+                 {
+                     item[i].Purchase(moneyPool);
+                 }
+             }
+         }*/
+
+        public int[] ReturnCoins()
         {
-            return moneyPool[0] += coin;
-        }
+            int[] coinsBack = new int[acceptedCoin.Length];
+            int newMoneyPool = moneyPool;
 
-        private void DepositCoin(int addedCoin)
-        {
-            
-            for(var i = 0; i < acceptedCoin.Length; i++)
+            for (var i = 0; i < acceptedCoin.Length; i++)
             {
-                if (acceptedCoin[i] == addedCoin)
-                {
-                    MoneyPool(addedCoin);
-                }
-                else
-                {
-                    throw new InvalidOperationException("Entry was invalid.");
-                }
-            }
-        }
-
-        private void PurchaseItem(int enteredItemID)
-        {
-            for(var i = 0; i < item.Length; i++)
-            {
-                if(item[i].ItemID == enteredItemID)
-                {
-                    item[i].Purchase(moneyPool);
-                }
-            }
-        }
-
-        readonly int[] coinsBack = new int[acceptedCoin.Length];
-
-        private void ReturnCoins(int moneyPool, int[] coinsBack, int[] acceptedCoin)
-        {
-            for (int i = 0; i < acceptedCoin.Length; i++)
-            {
-                if (moneyPool < acceptedCoin[i])
+                if (newMoneyPool < acceptedCoin[i])
                 {
                     coinsBack[i] = 0;
                 }
-                else if ((moneyPool / acceptedCoin[i]) > 0)
+                else if ((newMoneyPool / acceptedCoin[i]) > 0)
                 {
-                    coinsBack[i] = (moneyPool / acceptedCoin[i]);
-                    moneyPool = (moneyPool % acceptedCoin[i]);
+                    coinsBack[i] = (newMoneyPool / acceptedCoin[i]);
+                    newMoneyPool = (newMoneyPool % acceptedCoin[i]);
                 }
+
             }
+            return coinsBack;
         }
 
-        private void ExitMachine()
+        public string ExitMachine(int[] coinsBack)
         {
-            for (int i = 0; i < acceptedCoin.Length; i++)
+            string newString = "";
+            for (var i = 0; i < acceptedCoin.Length; i++)
             {
-                
-                Console.WriteLine(acceptedCoin[i] + "x" + coinsBack[i]);
+                newString += (acceptedCoin[i] + " x " + coinsBack[i] + ", ");
             }
+
+            return newString;
         }
 
 
