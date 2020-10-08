@@ -5,25 +5,27 @@ namespace VendingMachine
     {
         readonly string itemName;
         readonly int itemPrice;
+        readonly string message;
         readonly int itemID;
 
         public string ItemName { get { return itemName; } }
         public int ItemPrice { get { return itemPrice; } }
+        public string Message { get { return message; } }
         public int ItemID { get { return itemID; } }
 
-
-        public VendingItem(string itemName, int itemPrice, int itemID)
+        public VendingItem(string itemName, int itemPrice, string message, int itemID)
         {
             this.itemName = itemName;
             this.itemPrice = itemPrice;
+            this.message = message;
             this.itemID = itemID;
         }
 
-        public void Purchase(int moneyPool)
+        public void Purchase(int[] moneyPool)
         {
-            if (moneyPool >= ItemPrice)
+            if (moneyPool[0] >= ItemPrice)
             {
-                moneyPool -= ItemPrice;
+                moneyPool[0] -= ItemPrice;
             }
             else
             {
@@ -31,11 +33,11 @@ namespace VendingMachine
             }
         }
 
-        public void Examine()
+        public string Examine()
         {
-            Console.WriteLine("Item: {0} Price: {1}", ItemName, ItemPrice);
+            return "ID: " + ItemID + " Name: " + ItemName + " Price: " + ItemPrice;
         }
 
-        public abstract void UseItem();
+        public abstract string UseItem();
     }
 }

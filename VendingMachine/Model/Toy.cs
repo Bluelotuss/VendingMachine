@@ -4,13 +4,13 @@ namespace VendingMachine
 {
     public class Toy : VendingItem
     {
-        public Toy(string itemName, int itemPrice, int itemID) : base(itemName, itemPrice, itemID)
+        public Toy(string itemName, int itemPrice, string message, int itemID) : base(itemName, itemPrice, message, itemID)
         {
         }
 
-        public override void UseItem()
+        public override string UseItem()
         {
-            Console.WriteLine("Play with the toy");
+            return Message;
         }
     }
 }

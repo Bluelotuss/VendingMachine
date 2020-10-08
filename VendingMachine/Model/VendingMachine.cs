@@ -5,20 +5,20 @@ namespace VendingMachine
     { 
         private static VendingItem[] item = new VendingItem[3];
 
-        private VendingMachine()
+        public VendingMachine()
         {
-            item[0] = new Drink("CocaCola", 10, 1);
-            item[1] = new Food("Pizza", 20, 2);
-            item[2] = new Toy("Teddybear", 50, 3);
+            item[0] = new Drink("CocaCola", 10, "Drink the CocaCola", 1);
+            item[1] = new Food("Pizza", 20, "Eat the pizza", 2);
+            item[2] = new Toy("Teddybear", 50, "Play with teddy", 3);
         }
 
         readonly static int[] acceptedCoin = new int[8] { 1, 5, 10, 20, 50, 100, 500, 1000 };
 
 
-        private int moneyPool = 0;
+        private int[] moneyPool = new int[0];
         private int MoneyPool(int coin)
         {
-            return moneyPool += coin;
+            return moneyPool[0] += coin;
         }
 
         private void DepositCoin(int addedCoin)

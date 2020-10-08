@@ -4,14 +4,14 @@ namespace VendingMachine
 {
     public class Drink : VendingItem
     {
-        public Drink(string itemName, int itemPrice, int itemID) : base(itemName, itemPrice, itemID)
+        public Drink(string itemName, int itemPrice, string message, int itemID) : base(itemName, itemPrice, message, itemID)
         {
 
         }
 
-        public override void UseItem()
+        public override string UseItem()
         {
-            Console.WriteLine("Drink the drink");
+            return Message;
         }
 
     }
